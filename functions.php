@@ -24,7 +24,7 @@ endif;
 function my_scripts_and_styles(){
 
 $cache_buster = date("YmdHi", filemtime( get_stylesheet_directory() . '/css/main.css'));
-wp_enqueue_style( 'main', get_stylesheet_directory_uri() . '/css/main.css', array(), $cache_buster, 'all' );
+wp_enqueue_style( 'main-style', get_stylesheet_directory_uri() . '/css/main.css', array(), '1.0.0', 'all' );
 
 }
 
@@ -84,3 +84,117 @@ function reorder_billing_fields($fields) {
 
 add_filter('woocommerce_checkout_fields', 'reorder_billing_fields');
 
+function storefront_credit() {
+	$links_output = '';
+?>
+<div class="site-info">
+	<div class="col50 col-left">
+		<?php echo esc_html( apply_filters( 'storefront_copyright_text', $content = '&copy; ' . "MsKeyDeals Ltd" . ' ' . gmdate( 'Y' ) ) ); ?>
+		<br/>
+		<?php echo "GENUINE SOFTWARE LICENSES KEYS"; ?>
+	</div>
+	<div class="col50 col-right">
+		<img src="https://genuinelicense.store/wp/wp-content/uploads/2024/01/payments_.svg" />		
+	</div>
+	
+</div><!-- .site-info -->
+<?php
+}
+
+
+function storefront_handheld_footer_bar_home_link(){
+    echo '<a href="https://mskeydeals.com/">' . esc_attr__( 'Home', 'storefront' ) . '</a>';
+}
+
+function storefront_handheld_footer_bar_shop_link(){
+    echo '<a href="' . esc_url( get_permalink( get_option( 'woocommerce_shop_page_id' ) ) ) . '">' . esc_attr__( 'Shop', 'storefront' ) . '</a>';
+}
+function storefront_handheld_footer_bar() {
+	$links = array(
+		'home'      => array(
+			'priority' => 10,
+			'callback' => 'storefront_handheld_footer_bar_home_link',
+		),
+		'shop'      => array(
+			'priority' => 20,
+			'callback' => 'storefront_handheld_footer_bar_shop_link',
+		),
+		'my-account' => array(
+			'priority' => 30,
+			'callback' => 'storefront_handheld_footer_bar_account_link',
+		),
+		'search'     => array(
+			'priority' => 40,
+			'callback' => 'storefront_handheld_footer_bar_search',
+		),
+		'cart'       => array(
+			'priority' => 50,
+			'callback' => 'storefront_handheld_footer_bar_cart_link',
+		),
+	);
+
+	if ( did_action( 'woocommerce_blocks_enqueue_cart_block_scripts_after' ) || did_action( 'woocommerce_blocks_enqueue_checkout_block_scripts_after' ) ) {
+		return;
+	}
+
+	if ( wc_get_page_id( 'myaccount' ) === -1 ) {
+		unset( $links['my-account'] );
+	}
+
+	if ( wc_get_page_id( 'cart' ) === -1 ) {
+		unset( $links['cart'] );
+	}
+
+	$links = apply_filters( 'storefront_handheld_footer_bar_links', $links );
+	?>
+	<div class="storefront-handheld-footer-bar">
+		<ul class="columns-<?php echo count( $links ); ?>">
+			<?php foreach ( $links as $key => $link ) : ?>
+				<li class="<?php echo esc_attr( $key ); ?>">
+					<?php
+					if ( $link['callback'] ) {
+						call_user_func( $link['callback'], $key, $link );
+					}
+					?>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+	<?php
+}
+
+
+add_shortcode("html_block", "html_block");
+
+function html_block() {
+
+	ob_start();
+	
+	?>
+	<div class="html_block">
+		<ul class="tic-icon-list-items">
+			<li class="tic-icon-list-item">
+			<span class="tic-icon-list-icon">
+			<i aria-hidden="true" class="fas fa-cloud-download-alt"></i> </span>
+			<span class="tic-icon-list-text"> Download Immediately After Purchase</span>
+			</li>
+			<li class="tic-icon-list-item">
+			<span class="tic-icon-list-icon">
+			<i aria-hidden="true" class="fas fa-check-circle"></i> </span>
+			<span class="tic-icon-list-text">One Time Payment - Lifetime Licence</span>
+			</li>
+			<li class="tic-icon-list-item">
+			<span class="tic-icon-list-icon">
+			<i aria-hidden="true" class="fas fa-shield-alt"></i> </span>
+			<span class="tic-icon-list-text">Genuine Retail Software Guaranteed</span>
+			</li>
+			<li class="tic-icon-list-item">
+			<span class="tic-icon-list-icon">
+			<i aria-hidden="true" class="fas fa-envelope"></i> </span>
+			<span class="tic-icon-list-text"> Dedicated After Sales Support Team</span>
+			</li>
+			</ul>
+	</div>
+	<?php
+	return ob_get_clean();
+}

@@ -46,61 +46,20 @@ div.site-branding a:focus {
 	display: none !important;
 }
 
-
-
-@media (max-width: 480px) {
-	.site-header .custom-logo-link img {
-		max-width: 130px;
-	}
-
-	.col-full {
-		margin-left: 0;
-		margin-right: 0;
-	}
-
-	.site-branding a img {
-		padding-left: 10px;
-	}
-
-	.storefront-primary-navigation {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-
-	.footer-widgets.row-1.col-4.fix {
-		padding: 10px;
-	}
-
-	p.elementor-heading-title.elementor-size-small {
-		padding-bottom: 40px;
-	}
-
-	input[type=text],
-	input[type=email] {
-		padding: 11px 14px !important;
-	}
-
-	.elementor-16 .elementor-element.elementor-element-a01fcd7 .elementor-icon svg {
-		margin-left: -133px !important;
-		margin-top: -8px;
-	}
-}
-
-
-ul.sub-menu {
+.main-navigation ul.sub-menu {
 	background-color: #fff !important;
 	border-radius: 10px;
 	box-shadow: 1px 2px 6px #ddd;
 }
 
-.current-menu-item:after {
+.main-navigation .current-menu-item:after {
 	border-bottom: 2px solid #FF643D;
 	content: '';
 	position: absolute;
 	width: calc(100% - 30px);
 	bottom: 0;
 	left: 50%;
-	transform: translate(-50%, -20px);
+	transform: translate(-50%, -3px);
 }
 
 
@@ -122,13 +81,13 @@ footer.site-footer {
 	font-size: 14px;
 }
 
-div.site-info {
-	background-image: url(https://genuinelicense.store/wp/wp-content/uploads/2024/01/payments_.svg);
-	padding: 15px 0;
-	color: #fff;
-	background-repeat: no-repeat;
-	background-position: center right;
-}
+/* div.site-info {
+    background-image: url(https://genuinelicense.store/wp/wp-content/uploads/2024/01/payments_.svg);
+    padding: 15px 0;
+    color: #fff;
+    background-repeat: no-repeat;
+    background-position: center right;
+} */
 
 div.site-footer .widget .widget-title {
 	font-size: 22px;
@@ -140,7 +99,12 @@ div#block-21 p {
 
 .site-info {
 	color: white;
-	padding: 0px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .edit-link {
@@ -342,10 +306,6 @@ section.woocommerce-customer-details:after {
 	content: "";
 	display: block;
 	clear: both;
-}
-
-.home .site-content {
-	margin-bottom: -110px;
 }
 
 /* Newsletter form starts */
@@ -620,16 +580,12 @@ a.added_to_cart {
 	font-size: 20px;
 }
 
-div#block-21 p a {
-	outline: 0;
+.site-footer .widget_nav_menu ul li {
+	padding: 0;
 }
 
-.block.footer-widget-2 a {
-	outline: 0;
-}
-
-div#block-25 li a {
-	outline: 0;
+.site-footer .widget_nav_menu ul li::before {
+	display: none;
 }
 
 /*site footer section end*/
@@ -657,7 +613,55 @@ input#dgwt-wcas-search-input-1::placeholder {
 
 
 
-/*search input field*/
+/*Ajax popup modal*/
+.xoo-cp-pdetails td,
+.xoo-cp-pdetails th {
+	padding: 5px;
+}
+
+.xoo-cp-modal .xcp-btn {
+	background-color: #f36b37;
+	border-color: #d75b2c;
+}
+
+
+.html_block ul.tic-icon-list-items {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.html_block ul.tic-icon-list-items li.tic-icon-list-item {
+	padding-bottom: calc(9px/2);
+	display: flex;
+	gap: 10px;
+}
+
+.html_block ul.tic-icon-list-items span.tic-icon-list-icon {
+	display: flex;
+	position: relative;
+	top: 5px;
+}
+
+.html_block ul.tic-icon-list-items li.tic-icon-list-item i {
+	background: -moz-linear-gradient(top, #ff4521 0%, #ffa729 51%, #ff4d2b 100%) !important;
+	background: -webkit-linear-gradient(top, #ff4521 0%, #ffa729 51%, #ff4d2b 100%) !important;
+	background: linear-gradient(to bottom, #ff4521 0%, #ffa729 51%, #ff4d2b 100%) !important;
+	-webkit-background-clip: text !important;
+	-moz-background-clip: text !important;
+	background-clip: text !important;
+	-webkit-text-fill-color: transparent !important;
+	background-size: 200% !important;
+	width: 1.25em;
+	font-size: 22px;
+	text-align: center;
+}
+
+.html_block ul.tic-icon-list-items li.tic-icon-list-item span.tic-icon-list-text {
+	color: #0f0f0f;
+	transition: color .3s;
+	font-size: 16px;
+}
 
 
 
@@ -666,6 +670,11 @@ input#dgwt-wcas-search-input-1::placeholder {
 @media (min-width: 768px) {
 	.site-header-cart .cart-contents::after {
 		color: #04bdf0;
+	}
+
+	.xoo-cp-pdetails td,
+	.xoo-cp-pdetails th {
+		padding: 1em 1.41575em;
 	}
 }
 
@@ -678,6 +687,14 @@ input#dgwt-wcas-search-input-1::placeholder {
 
 .site-info span {
 	display: none;
+}
+
+.storefront-handheld-footer-bar ul li.home>a::before {
+	content: "\f015"
+}
+
+.storefront-handheld-footer-bar ul li.shop>a::before {
+	content: "\f54e"
 }
 
 /*Footer site info end*/
@@ -886,6 +903,11 @@ input#dgwt-wcas-search-input-1::placeholder {
 	table.cart td {
 		padding: 10px;
 	}
+
+	.site-info {
+		flex-direction: row;
+	}
+
 }
 
 
@@ -900,8 +922,45 @@ input#dgwt-wcas-search-input-1::placeholder {
 }
 
 @media (max-width: 480px) {
+	.site-header .custom-logo-link img {
+		max-width: 115px;
+	}
+
+	.site-branding a img {
+		padding-left: 10px;
+	}
+
+	.storefront-primary-navigation {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	p.elementor-heading-title.elementor-size-small {
+		padding-bottom: 40px;
+	}
+
+	input[type=text],
+	input[type=email] {
+		padding: 11px 14px !important;
+	}
+
+	.elementor-16 .elementor-element.elementor-element-a01fcd7 .elementor-icon svg {
+		margin-left: -133px !important;
+		margin-top: -8px;
+	}
+
 	.storefront-breadcrumb {
 		padding: 1em 0.6em;
+	}
+}
+
+@media (max-width: 767px) {
+	footer#colophon {
+		padding-bottom: 80px;
+	}
+
+	.col50.col-left {
+		text-align: center;
 	}
 }
 
