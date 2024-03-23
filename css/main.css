@@ -678,6 +678,12 @@ input#dgwt-wcas-search-input-1::placeholder {
 	}
 }
 
+.site-main,
+.content-area,
+.widget-area,
+.hentry {
+	margin-bottom: 0;
+}
 
 /*Footer site info*/
 
@@ -698,17 +704,6 @@ input#dgwt-wcas-search-input-1::placeholder {
 }
 
 /*Footer site info end*/
-
-
-/*footer section start*/
-@media (min-width: 768px) {
-
-	.content-area,
-	.widget-area {
-		margin-bottom: 0.617924em;
-	}
-
-}
 
 /*footer section end*/
 
@@ -967,5 +962,52 @@ input#dgwt-wcas-search-input-1::placeholder {
 @media (min-width: 768px) and (max-width: 930px) {
 	form.woocommerce-cart-form {
 		overflow-x: auto;
+	}
+}
+
+.tic-header-widget {
+	display: flex;
+	justify-content: space-between;
+	max-width: 1064px;
+	margin: 0 auto;
+	padding: 10px 0;
+	align-items: center;
+	width: 100%;
+}
+
+.tic-header-widget .tic-gt {
+	min-width: 200px;
+	min-height: 30px;
+	display: flex;
+	justify-content: end;
+}
+
+.tic-header-widget .gtranslate_wrapper {
+	position: absolute;
+}
+
+.tic-header-widget .gtranslate_wrapper .gt_switcher,
+.tic-header-widget .gtranslate_wrapper .gt_switcher .gt_option {
+	width: 200px !important;
+}
+
+.tic-header-widget .gtranslate_wrapper .gt_switcher .gt_selected a {
+	width: 188px !important;
+}
+
+.tic-header-widget .woo-multi-currency {
+	border: 1px solid #ccc;
+	padding: 1px 0;
+	margin-top: 2px;
+	background: #fff linear-gradient(180deg, #efefef 0%, #fff 70%);
+}
+
+@media (min-width: 768px) {
+	.tic-header-widget .woo-multi-currency {
+		min-width: 200px;
+	}
+
+	.tic-header-widget .woo-multi-currency:hover {
+		background: #fff;
 	}
 }

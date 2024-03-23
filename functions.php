@@ -23,8 +23,8 @@ endif;
 
 function my_scripts_and_styles(){
 
-$cache_buster = date("YmdHi", filemtime( get_stylesheet_directory() . '/css/main.css'));
-wp_enqueue_style( 'main-style', get_stylesheet_directory_uri() . '/css/main.css', array(), '1.0.0', 'all' );
+$cache_buster = date("YmdHi", filemtime( get_stylesheet_directory() . '/css/main.css')); //'1.0.0'
+wp_enqueue_style( 'main-style', get_stylesheet_directory_uri() . '/css/main.css', array(), $cache_buster, 'all' );
 
 }
 
@@ -197,4 +197,15 @@ function html_block() {
 	</div>
 	<?php
 	return ob_get_clean();
+}
+
+add_action("storefront_before_content", "tic_header_widget");
+function tic_header_widget(){
+	$output = <<<EOT
+	<div class="tic-header-widget">%s
+		<div class="tic-gt">%s</div>
+	</div>
+EOT;
+	$output = sprintf($output, do_shortcode("[woo_multi_currency_layout10]"), do_shortcode("[gtranslate]"));
+	echo $output;
 }
